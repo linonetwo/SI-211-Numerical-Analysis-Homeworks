@@ -1,6 +1,23 @@
 const { getBabelLoader, injectBabelPlugin } = require('react-app-rewired');
 const math = require('remark-math');
 const katex = require('remark-html-katex');
+const map = require('unist-util-map');
+const HTMLtoJSX = require('htmltojsx');
+
+const htmlToJSXConverter = new HTMLtoJSX({
+  createClass: false,
+});
+const isJSXRegex = /<\/?[A-Z]/;
+const htmlToJSXPlugin = () =>
+  function transformer(ast) {
+    const astMapped = map(ast, node => {
+      if (node.type === 'html' && !isJSXRegex.test(node.value)) {
+        return { ...node, value: htmlToJSXConverter.convert(node.value) };
+      }
+      return node;
+    });
+    return astMapped;
+  };
 
 module.exports = (config, env) => {
   config = injectBabelPlugin('transform-decorators-legacy', config);
@@ -45,7 +62,7 @@ module.exports = (config, env) => {
         {
           loader: '@mdx-js/loader',
           options: {
-            mdPlugins: [math, katex],
+            mdPlugins: [math, katex, [htmlToJSXPlugin, {}]],
           },
         },
       ],
