@@ -1,0 +1,67 @@
+import { InlineMath, BlockMath } from 'react-katex';
+import { DisplayNumericalErrors, Difference } from './Calculations'
+
+# Homework 1
+
+## 1.
+
+We want to evaluate the function
+<InlineMath>
+  {String.raw`f(x) = \frac{sin(10^4x)}{x}`}
+</InlineMath>
+for different values of x.
+
+### (a) Evaluate the above function at x = π by using Matlab, Julia, C++ or any other programming language of your choice. How big is the numerical approximation error? Can you explain why you observe this error?
+
+<div>Apply Math.PI ({Math.PI}) to </div>
+<DisplayNumericalErrors value={Math.PI} />
+
+The output was supposed to be zero, so it's the error.
+
+The causes of error are:
+
+- Math.PI ({Math.PI}) is not the real Pi, is's an approximation
+- Even we input the real Pi, it got precision lost in binary storage
+- That error enlarged by 10e4
+- Error hold by f'(x) at Pi which is 1
+
+### (b) Evaluate the above function at x = 1e−10. How big is the numerical evaluation error?
+
+<div>Apply 1 / (10 ** 10) ({1 / (10 ** 10)}) to </div>
+<DisplayNumericalErrors value={1 / (10 ** 10)} />
+
+The output was supposed to be zero, so it's the error.
+
+It's amplificated by the denominator so it's so huge.
+
+## 2. Numeric differentiation based on central differences:
+
+### (a)
+Implement a function (for example in Python, Julia, or Matlab) that uses numeric differentiation based on central differences,
+<InlineMath>
+  {String.raw`f'(x) \simeq \frac{f(x + h) - f(x - h)}{2h}`}
+</InlineMath>
+Here, the inputs of the differentiation routine are the scalar function f that we want to differentiate, the point x at which the derivative should be evaluated, and the finite perturbation h > 0. Use the syntax diff(f,x,h) = ...
+
+<Difference />
+
+### (b)
+
+Evaluate the derivative of the function f(x) = exp(x) at x = 0 using the above routine diff. Plot the numerical differentiation error in dependence on h ∈ [10−15, 10−1] and interpret the result. Use logarithmic scales on both axis!
+
+<Difference functionToDiff={x => Math.exp(x)} x={0} hRange={[-15, -1]} actualDifference={1} />
+
+## 3.
+
+In order to evaluate the factorable function
+<InlineMath>
+  {String.raw`f(x) = sin(cos(x)) \ast cos(x)^2`}
+</InlineMath>
+we write an evaluation algorithm of the form:
+
+- a0 = x
+- a1 = cos(x)
+- a2 = a1 ∗ a1
+- a3 = sin(a1)
+- a4 = a2 ∗ a3
+- f(x) = a4 .

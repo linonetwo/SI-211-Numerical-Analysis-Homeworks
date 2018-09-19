@@ -31,6 +31,7 @@
     "arrow-parens": ["off"],
     "consistent-return": "off",
     "react/prefer-stateless-function": "off",
+    "import/prefer-default-export": "off",
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
     "flowtype/define-flow-type": 1,
