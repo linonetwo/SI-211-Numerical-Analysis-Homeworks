@@ -65,3 +65,20 @@ we write an evaluation algorithm of the form:
 - a3 = sin(a1)
 - a4 = a2 ∗ a3
 - f(x) = a4 .
+
+### a. What is the corresponding algorithm for evaluating the derivative of f(x) using the forward mode of algorithmic differentiation (AD)? 
+
+- b0 = 1
+- b1 = -sin(x) * b0
+- b2 = a1 ∗ b1 + b1 * a1
+- b3 = cos(a1) * b1
+- b4 = a2 ∗ b3 + a3 * b2
+- f'(x) = b4 .
+
+### b. What is the order of magnitude of the numerical error that is associated with evaluating the derivative of f at x = 0 using this AD code?
+
+There is only numerical error, which is
+
+<InlineMath>
+  {String.raw`\frac{eps}{h} = O(\frac{eps}{h})`}
+</InlineMath>
