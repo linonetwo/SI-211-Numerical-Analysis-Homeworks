@@ -1,0 +1,43 @@
+import { InlineMath, BlockMath } from 'react-katex';
+import { Interpolation } from './Calculations'
+
+# Homework 1
+
+林东吴 77489018
+
+## 1.
+
+Assume that a function f : R → R satisfies f(0) = 1, f(1) = 3, and f(2) = 19. Construct a polynomial of the form 
+<InlineMath>
+  {String.raw`p(x) = a_0 + a_1x + a_2x^2`}
+</InlineMath>
+such that p interpolates f at x ∈ {0, 1, 2}.
+What are a0, a1, a2?
+
+### Solution
+
+<BlockMath>{String.raw`p(x) = 1 \times \frac{(x-1)(x-2)}{(0-1)(0-2)} + 3 \times \frac{(x-0)(x-2)}{(1-0)(1-2)} + 19 \times \frac{(x-0)(x-1)}{(2-0)(2-1)}
+`}</BlockMath>
+<BlockMath>{String.raw`p(x) = \frac{x^2-3x+2}{2} - 3 \times (x^2 - 2x) + \frac{19}{2} \times (x^2 - x)
+`}</BlockMath>
+<BlockMath>{String.raw`p(x) = 7x^2 - 5x + 1
+`}</BlockMath>
+
+So 
+
+<InlineMath>
+  {String.raw`a_0 = 1, a_1 = -5, a_2 = 7`}
+</InlineMath>
+
+## 2.
+
+Assume that a function f : R2 → R satisfies
+f(0, 0) = 1 , f(0, 1) = 3 , f(0, 2) = 19 , f(1, 0) = 3 , f(2, 0) = 19 , f(1, 1) = 0
+Construct a polynomial p : R
+2 → R of the form
+p(x) = a0 + a1x1 + a2x
+2
+1 + a3x2 + a4x
+2
+2 + a5x1x2
+such that p interpolates f at all 6 points. What are a0, a1, a2, a3, a4, a5?
