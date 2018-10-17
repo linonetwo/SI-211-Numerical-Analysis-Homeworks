@@ -1,5 +1,5 @@
 import { InlineMath, BlockMath } from 'react-katex';
-import { Interpolation } from './Calculations'
+import { Interpolation, LagrangeFunctionString } from './Calculations'
 
 # Homework 1
 
@@ -41,3 +41,23 @@ p(x) = a0 + a1x1 + a2x
 2
 2 + a5x1x2
 such that p interpolates f at all 6 points. What are a0, a1, a2, a3, a4, a5?
+
+旷了一节课不知道怎么做 3D 的……
+
+## 3.
+
+### Function
+
+<LagrangeFunctionString />
+
+### Test: x => x^2
+
+<Interpolation func={x => x ** 2} />
+
+### x => Sin(x)
+
+<Interpolation func={x => Math.sin(x)} />
+
+### x => 1 / (1 + x^2)
+
+<Interpolation func={x => 1 / (1 + x ** 2)} />
